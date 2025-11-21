@@ -23,16 +23,16 @@ public class Familia {
     private Long id;
 
     @Column(name= "nome_familia", nullable = false)
-    private String nomeFamilia;
+    private String nomeDaFamilia;
 
     @OneToMany(mappedBy = "familia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pessoa> membros = new ArrayList<>();
+    private List<Pessoa> membrosDaFamilia = new ArrayList<>();
 
     public BigDecimal getTotalRenda(){
-        if(membros == null || membros.isEmpty()){
+        if(membrosDaFamilia == null || membrosDaFamilia.isEmpty()){
             return BigDecimal.ZERO;
         }
-        return membros.stream()
+        return membrosDaFamilia.stream()
                 .filter(Objects::nonNull)
                 .map(Pessoa::getTotalSalario)
                 .filter(Objects::nonNull)

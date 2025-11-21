@@ -13,6 +13,6 @@ import java.math.BigDecimal;
 public class SalarioResponseDTO {
 
     private Long id;
-    private BigDecimal salario;
+    private BigDecimal valorSalario;
     private Periodo periodo;
 }
