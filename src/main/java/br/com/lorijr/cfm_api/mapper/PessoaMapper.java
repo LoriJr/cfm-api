@@ -13,6 +13,6 @@ public interface PessoaMapper {
     PessoaResponseDTO toPessoaDTO(Pessoa pessoa);
 
     @Mapping(target="id", ignore = true)
-    @Mapping(target = "salarios")
+//    @Mapping(target = "salarios")
     Pessoa toEntity(PessoaRequestDTO requestDTO);
 }

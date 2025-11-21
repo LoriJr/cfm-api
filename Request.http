@@ -1,0 +1,8 @@
+### CRIAR SALARIO
+POST http://localhost:8080/salarios
+Content-Type: application/json
+
+{
+    "valorSalario": 1000.00,
+    "periodo": "PRIMEIRA_QUINZENA"
+}
