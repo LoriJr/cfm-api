@@ -40,4 +40,16 @@ public class SalarioController {
     public ResponseEntity<SalarioResponseDTO> obterSalarioPorId(@PathVariable Long id){
         return ResponseEntity.ok(service.buscarPorId(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSalario(@PathVariable Long id) {
+        service.deletarSalario(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<SalarioResponseDTO> atualizarSalario(@PathVariable Long id, @RequestBody @Valid SalarioRequestDTO requestDTO) {
+        SalarioResponseDTO response = service.atualizarSalario(id, requestDTO);
+        return ResponseEntity.ok(response);
+    }
 }
