@@ -4,5 +4,8 @@ Content-Type: application/json
 
 {
     "valorSalario": 1000.00,
-    "periodo": "PRIMEIRA_QUINZENA"
+    "periodo": "SEGUNDA_QUINZENA"
 }
+
+### BUSCAR SALARIO(s)
+GET http://localhost:8080/salarios
