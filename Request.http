@@ -3,7 +3,7 @@ POST http://localhost:8080/salarios
 Content-Type: application/json
 
 {
-    "valorSalario": 1000.00,
+    "valorSalario": 3500.00,
     "periodo": "SEGUNDA_QUINZENA"
 }
 
@@ -26,8 +26,22 @@ POST http://localhost:8080/pessoas
 Content-Type: application/json
 
 {
-  "nome": "Daniel Brown",
-  "salarioIds": [1, 2]
+  "nome": "Junior Silva",
+  "salarioIds": [3]
 
 }
 
+### BUSCAR PESSOAS
+GET http://localhost:8080/pessoas
+
+
+### CRIAR FAMILIA
+
+POST http://localhost:8080/familias
+Content-Type: application/json
+
+{
+  "nomeDaFamilia": "Familia-Silva",
+  "membrosIds": [1,4,6]
+
+}

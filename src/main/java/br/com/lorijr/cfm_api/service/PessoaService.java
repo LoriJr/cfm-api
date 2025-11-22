@@ -9,13 +9,9 @@ import br.com.lorijr.cfm_api.repository.PessoaRepository;
 import br.com.lorijr.cfm_api.repository.SalarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @RequiredArgsConstructor
 @Service

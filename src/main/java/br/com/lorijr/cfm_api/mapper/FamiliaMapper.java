@@ -3,8 +3,7 @@ package br.com.lorijr.cfm_api.mapper;
 import br.com.lorijr.cfm_api.domain.Familia;
 import br.com.lorijr.cfm_api.dto.familia.FamiliaRequestDTO;
 import br.com.lorijr.cfm_api.dto.familia.FamiliaResponseDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = {PessoaMapper.class})
 public interface FamiliaMapper {
@@ -15,5 +14,9 @@ public interface FamiliaMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "membrosDaFamilia", ignore = true)
     Familia familiaToEntity(FamiliaRequestDTO requestDTO);
+
+    @Mapping(target = "nomeDaFamilia", source = "familia.nomeDaFamilia")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void atualizarFamilia(FamiliaRequestDTO requestDTO, @MappingTarget Familia familia);
 
 }
