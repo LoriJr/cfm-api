@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -14,5 +16,6 @@ public class FamiliaRequestDTO {
 
     @NotBlank(message = "O nome da família é obrigatório")
     private String nomeDaFamilia;
+    private List<Long> membrosIds;
 
 }

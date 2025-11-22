@@ -61,6 +61,10 @@ public class FamiliaService {
                 .orElseThrow(() -> new RuntimeException("Id de Família não encontrado"));
         mapper.atualizarFamilia(requestDTO, familia);
 
+        if(requestDTO.getMembrosIds() != null){
+            vincularMembroDaFamilia(familia, requestDTO.getMembrosIds());
+        }
+
         Familia familiaAtualizado = repository.save(familia);
         return mapper.familiaToDTO(familiaAtualizado);
     }

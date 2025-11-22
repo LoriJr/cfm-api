@@ -15,7 +15,7 @@ public interface FamiliaMapper {
     @Mapping(target = "membrosDaFamilia", ignore = true)
     Familia familiaToEntity(FamiliaRequestDTO requestDTO);
 
-    @Mapping(target = "nomeDaFamilia", source = "familia.nomeDaFamilia")
+    @Mapping(target = "nomeDaFamilia", source = "nomeDaFamilia")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void atualizarFamilia(FamiliaRequestDTO requestDTO, @MappingTarget Familia familia);
 

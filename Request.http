@@ -45,3 +45,12 @@ Content-Type: application/json
   "membrosIds": [1,4,6]
 
 }
+
+### ADICIONAR MEMBROS
+
+PATCH http://localhost:8080/familias/1
+Content-Type: application/json
+
+{
+   "membrosIds": [4,6]
+}
