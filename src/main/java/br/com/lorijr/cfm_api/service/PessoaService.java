@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RequiredArgsConstructor
 @Service
@@ -27,6 +28,14 @@ public class PessoaService {
     @Transactional
     public PessoaResponseDTO criarPessoa(PessoaRequestDTO requestDTO) {
         Pessoa pessoa = repository.save(mapper.toEntity(requestDTO));
+
+        if (requestDTO.getSalarioIds() != null && !requestDTO.getSalarioIds().isEmpty()) {
+            List<Salario> salariosVinculados = vincularSalarios(pessoa, requestDTO.getSalarioIds());
+
+            // CRUCIAL: Atualiza a lista do objeto em memória para o retorno do Mapper ser preenchido
+            pessoa.getSalarios().addAll(salariosVinculados);
+        }
+
         return mapper.toPessoaDTO(pessoa);
     }
 
@@ -70,5 +79,27 @@ public class PessoaService {
         novosSalarios.forEach(s -> s.setPessoa(pessoa));
         pessoa.setSalarios(novosSalarios);
     }
+
+    private List<Salario> vincularSalarios(Pessoa pessoa, List<Long> ids) {
+        List<Salario> salarios = salarioRepository.findAllById(ids);
+
+        if (salarios.size() != ids.size()) {
+            throw new RuntimeException("Um ou mais salários não foram encontrados.");
+            //throw new EntityNotFoundException("Um ou mais salários não foram encontrados.");
+        }
+
+        salarios.forEach(salario -> {
+            if (salario.getPessoa() != null) {
+                // Opcional: Bloquear roubo de salário de outra pessoa
+                throw new IllegalArgumentException("O salário id " + salario.getId() + " já pertence a outra pessoa.");
+            }
+            salario.setPessoa(pessoa); // Atualiza a FK no objeto Salario
+        });
+
+        // Salva as alterações na tabela de Salário (FKs atualizadas)
+        return salarioRepository.saveAll(salarios);
+    }
+
+
 
 }

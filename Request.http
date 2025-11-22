@@ -9,3 +9,13 @@ Content-Type: application/json
 
 ### BUSCAR SALARIO(s)
 GET http://localhost:8080/salarios
+
+### CRIAR PESSOA
+POST http://localhost:8080/pessoas
+Content-Type: application/json
+
+{
+  "nome": "Daniel Brown",
+  "salarioIds": [1, 2]
+
+}
