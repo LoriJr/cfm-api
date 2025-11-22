@@ -3,8 +3,8 @@ POST http://localhost:8080/salarios
 Content-Type: application/json
 
 {
-    "valorSalario": 3500.00,
-    "periodo": "SEGUNDA_QUINZENA"
+    "valorSalario": 1350.00,
+    "periodo": "PRIMEIRA_QUINZENA"
 }
 
 ### BUSCAR SALARIO(s)
@@ -15,7 +15,7 @@ PATCH http://localhost:8080/salarios/1
 Content-Type: application/json
 
 {
-    "valorSalario": 1500.00,
+    "valorSalario": 2350.00,
     "periodo": "PRIMEIRA_QUINZENA"
 }
 
@@ -26,8 +26,8 @@ POST http://localhost:8080/pessoas
 Content-Type: application/json
 
 {
-  "nome": "Junior Silva",
-  "salarioIds": [3]
+  "nome": "Marcos Maia",
+  "salarioIds": [4,5]
 
 }
 
@@ -42,7 +42,7 @@ Content-Type: application/json
 
 {
   "nomeDaFamilia": "Familia-Silva",
-  "membrosIds": [1,4,6]
+  "membrosIds": [4,7]
 
 }
 
@@ -53,4 +53,18 @@ Content-Type: application/json
 
 {
    "membrosIds": [4,6]
+}
+
+### CONTA AVULSA
+POST http://localhost:8080/conta-avulsa
+Content-Type: application/json
+
+{
+  "dataVencimento": "2024-11-25",
+  "familiaId": 3,
+  "despesa": {
+    "descricao": "Conta de Gaz da Comgaz",
+    "valor": 350.90,
+    "periodo": "PRIMEIRA_QUINZENA"
+  }
 }
