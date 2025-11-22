@@ -19,4 +19,8 @@ public class ContaAvulsa {
 
     @Embedded
     private Despesa despesa;
+
+    @ManyToOne
+    @JoinColumn(name = "familia_id")
+    private Familia familia;
 }
