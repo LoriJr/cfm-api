@@ -4,6 +4,8 @@ import br.com.lorijr.cfm_api.domain.Pessoa;
 import br.com.lorijr.cfm_api.domain.Salario;
 import br.com.lorijr.cfm_api.dto.pessoa.PessoaRequestDTO;
 import br.com.lorijr.cfm_api.dto.pessoa.PessoaResponseDTO;
+import br.com.lorijr.cfm_api.exceptions.PessoaNaoEcontradaException;
+import br.com.lorijr.cfm_api.exceptions.SalarioNaoEncontradoException;
 import br.com.lorijr.cfm_api.mapper.PessoaMapper;
 import br.com.lorijr.cfm_api.repository.PessoaRepository;
 import br.com.lorijr.cfm_api.repository.SalarioRepository;
@@ -45,20 +47,20 @@ public class PessoaService {
     public PessoaResponseDTO buscarPessoaPorId(Long id) {
         return repository.findById(id)
                 .map(mapper::toPessoaDTO)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+                .orElseThrow(() -> new PessoaNaoEcontradaException("Pessoa não encontrada"));
     }
 
     public void deletarPessoa(Long id){
         repository.findById(id)
                 .ifPresentOrElse(
                         repository::delete,
-                        () -> { throw new RuntimeException("Pessoa não encontrada"); });
+                        () -> { throw new PessoaNaoEcontradaException("Pessoa não encontrada"); });
     }
 
     @Transactional
     public PessoaResponseDTO atualizarPessoa(Long id, PessoaRequestDTO requestDTO) {
         Pessoa pessoa = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+                .orElseThrow(() -> new PessoaNaoEcontradaException("Pessoa não encontrada"));
         mapper.updatePessoa(requestDTO, pessoa);
 
         if(requestDTO.getSalarioIds() !=null){
@@ -80,8 +82,7 @@ public class PessoaService {
         List<Salario> salarios = salarioRepository.findAllById(ids);
 
         if (salarios.size() != ids.size()) {
-            throw new RuntimeException("Um ou mais salários não foram encontrados.");
-            //throw new EntityNotFoundException("Um ou mais salários não foram encontrados.");
+            throw new SalarioNaoEncontradoException("Um ou mais salários não foram encontrados.");
         }
 
         salarios.forEach(salario -> {

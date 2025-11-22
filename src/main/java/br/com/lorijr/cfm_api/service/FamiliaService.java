@@ -4,6 +4,7 @@ import br.com.lorijr.cfm_api.domain.Familia;
 import br.com.lorijr.cfm_api.domain.Pessoa;
 import br.com.lorijr.cfm_api.dto.familia.FamiliaRequestDTO;
 import br.com.lorijr.cfm_api.dto.familia.FamiliaResponseDTO;
+import br.com.lorijr.cfm_api.exceptions.FamiliaNaoEncontradaException;
 import br.com.lorijr.cfm_api.mapper.FamiliaMapper;
 import br.com.lorijr.cfm_api.repository.FamiliaRepository;
 import br.com.lorijr.cfm_api.repository.PessoaRepository;
@@ -45,20 +46,20 @@ public class FamiliaService {
     public FamiliaResponseDTO buscarPorId(Long id){
         return repository.findById(id)
                 .map(mapper::familiaToDTO)
-                .orElseThrow(()-> new RuntimeException("Id de Família não encontrado"));
+                .orElseThrow(()-> new FamiliaNaoEncontradaException("Id de Família não encontrado"));
     }
 
     public void deletarFamilia(Long id) {
         repository.findById(id)
                 .ifPresentOrElse(
                         repository::delete,
-                        () -> { throw new RuntimeException("Id de Família não encontrado"); }
+                        () -> { throw new FamiliaNaoEncontradaException("Id de Família não encontrado"); }
                 );
     }
 
     public FamiliaResponseDTO atualizarFamilia(Long id, FamiliaRequestDTO requestDTO){
         Familia familia = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id de Família não encontrado"));
+                .orElseThrow(() -> new FamiliaNaoEncontradaException("Id de Família não encontrado"));
         mapper.atualizarFamilia(requestDTO, familia);
 
         if(requestDTO.getMembrosIds() != null){
@@ -73,7 +74,7 @@ public class FamiliaService {
         List<Pessoa> membros = pessoaRepository.findAllById(ids);
 
         if(membros.size() != ids.size()){
-            throw new IllegalArgumentException("Alguns membros da família não forem encontrados.");
+            throw new FamiliaNaoEncontradaException("Alguns membros da família não forem encontrados.");
         }
         membros.forEach(pessoa -> pessoa.setFamilia(familia));
         return pessoaRepository.saveAll(membros);

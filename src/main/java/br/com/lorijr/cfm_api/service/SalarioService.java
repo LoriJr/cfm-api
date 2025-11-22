@@ -3,6 +3,7 @@ package br.com.lorijr.cfm_api.service;
 import br.com.lorijr.cfm_api.domain.Salario;
 import br.com.lorijr.cfm_api.dto.salario.SalarioRequestDTO;
 import br.com.lorijr.cfm_api.dto.salario.SalarioResponseDTO;
+import br.com.lorijr.cfm_api.exceptions.SalarioNaoEncontradoException;
 import br.com.lorijr.cfm_api.mapper.SalarioMapper;
 import br.com.lorijr.cfm_api.repository.SalarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,21 +36,21 @@ public class SalarioService {
     public SalarioResponseDTO buscarPorId(Long id){
         return repository.findById(id)
                 .map(mapper::salarioToDTO)
-                .orElseThrow(() -> new RuntimeException("Salário não encontrado"));
+                .orElseThrow(() -> new SalarioNaoEncontradoException("Salário não encontrado"));
     }
 
     public void deletarSalario(Long id) {
         repository.findById(id)
                 .ifPresentOrElse(
                         repository::delete,
-                        () -> { throw new RuntimeException("Salário não encontrado"); });
+                        () -> { throw new SalarioNaoEncontradoException("Salário não encontrado"); });
 
     }
 
     @Transactional
     public SalarioResponseDTO atualizarSalario(Long id, SalarioRequestDTO dto){
         Salario salario = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Salario não encontrado"));
+                .orElseThrow(() -> new SalarioNaoEncontradoException("Salario não encontrado"));
 
         mapper.atualizarSalario(dto, salario);
         Salario atualizado = repository.save(salario);
