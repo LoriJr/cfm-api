@@ -10,6 +10,17 @@ Content-Type: application/json
 ### BUSCAR SALARIO(s)
 GET http://localhost:8080/salarios
 
+### ATUALIZAR SALARIO
+PATCH http://localhost:8080/salarios/1
+Content-Type: application/json
+
+{
+    "valorSalario": 1500.00,
+    "periodo": "PRIMEIRA_QUINZENA"
+}
+
+// ------------------------------------ PESSOA ------------------------------------
+
 ### CRIAR PESSOA
 POST http://localhost:8080/pessoas
 Content-Type: application/json
@@ -19,3 +30,4 @@ Content-Type: application/json
   "salarioIds": [1, 2]
 
 }
+
