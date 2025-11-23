@@ -6,6 +6,7 @@ import br.com.lorijr.cfm_api.domain.Despesa;
 import br.com.lorijr.cfm_api.dto.cartaodecredito.CartaoRequestDTO;
 import br.com.lorijr.cfm_api.dto.cartaodecredito.CartaoResponseDTO;
 import br.com.lorijr.cfm_api.dto.cartaodecredito.CompraCartaoRequestDTO;
+import br.com.lorijr.cfm_api.dto.cartaodecredito.CompraCartaoResponseDTO;
 import br.com.lorijr.cfm_api.dto.despesa.DespesaRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -27,5 +28,10 @@ public interface CartaoMapper {
     CompraCartao toCompraEntity(CompraCartaoRequestDTO dto);
 
     Despesa toDespesa(DespesaRequestDTO dto);
+
+    @Mapping(target = "despesa", source = "despesa")
+    CompraCartaoResponseDTO toCompraDTO(CompraCartao entity);
+
+    DespesaRequestDTO toDespesaDTO(Despesa entity);
 
 }
