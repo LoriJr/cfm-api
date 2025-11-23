@@ -41,7 +41,7 @@ public class CartaoDeCreditoService {
         CartaoDeCredito cartao = cartaoRepository.findById(cartaoId)
                 .orElseThrow(() -> new CartaoNaoEncontradoException("Cartão não encontrado"));
         CompraCartao novaCompra = mapper.toCompraEntity(compraDTO);
-        novaCompra.setCartaoDeCredito(cartao);
+        novaCompra.setCartao(cartao);
         cartao.getCompras().add(novaCompra);
         cartaoRepository.save(cartao);
     }

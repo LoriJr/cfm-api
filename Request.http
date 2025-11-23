@@ -43,7 +43,6 @@ Content-Type: application/json
 {
   "nomeDaFamilia": "Familia-Silva",
   "membrosIds": [4,7]
-
 }
 
 ### ADICIONAR MEMBROS
@@ -61,7 +60,7 @@ Content-Type: application/json
 
 {
   "dataVencimento": "2024-11-25",
-  "familiaId": 3,
+  "familiaId": 1,
   "despesa": {
     "descricao": "Conta de Gaz da Comgaz",
     "valor": 350.90,
@@ -76,11 +75,11 @@ Content-Type: application/json
 {
     "nomeDoCartao": "Nubank Ultravioleta",
     "diaVencimento": 10,
-    "titularId": 4
+    "titularId": 6
 }
 
 ### ADICIONAR COMPRA NO CARTÃO
-POST http://localhost:8080/cartoes/1/compras
+POST http://localhost:8080/cartoes/2/compras
 Content-Type: application/json
 
 {
@@ -93,7 +92,7 @@ Content-Type: application/json
 }
 
 ### CONSULTAR CARTÃO POR PESSOA
-GET http://localhost:8080/cartoes?pessoaId=4
+GET http://localhost:8080/cartoes?pessoaId=6
 
 
 ### ADICIONAR CONTA AVULSA

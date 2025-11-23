@@ -1,9 +1,14 @@
 package br.com.lorijr.cfm_api.dto.fatura;
 
 import br.com.lorijr.cfm_api.dto.cartaodecredito.CompraCartaoResponseDTO;
+import lombok.Builder;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Data
+@Builder
 public class FaturaCartaoDTO {
     private Long cartaoId;
     private String nomeCartao;

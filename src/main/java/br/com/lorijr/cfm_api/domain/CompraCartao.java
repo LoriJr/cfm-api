@@ -25,5 +25,5 @@ public class CompraCartao {
 
     @ManyToOne
     @JoinColumn(name = "cartao_id")
-    private CartaoDeCredito cartaoDeCredito;
+    private CartaoDeCredito cartao;
 }

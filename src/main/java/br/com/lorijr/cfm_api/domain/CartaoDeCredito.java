@@ -33,7 +33,7 @@ public class CartaoDeCredito {
     @JoinColumn(name = "pessoa_id")
     private Pessoa titular;
 
-    @OneToMany(mappedBy = "cartaoDeCredito", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cartao", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompraCartao> compras = new ArrayList<>();
 
     public BigDecimal getTotalCompras() {
