@@ -10,7 +10,7 @@ import lombok.Data;
 public class CartaoRequestDTO {
 
     @NotBlank(message = "Nome do cartão é obrigatório")
-    private String nome;
+    private String nomeDoCartao;
 
     @NotNull(message = "Dia de vencimento é obrigatório")
     @Min(1) @Max(31)

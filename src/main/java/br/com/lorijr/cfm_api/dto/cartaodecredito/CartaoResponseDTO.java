@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class CartaoResponseDTO {
     private Long id;
-    private String nome;
+    private String nomeDoCartao;
     private Integer diaVencimento;
     private String nomeTitular;
     private BigDecimal totalFatura;
