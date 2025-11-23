@@ -24,7 +24,7 @@ public interface CartaoMapper {
     CartaoDeCredito dtoToEntity(CartaoRequestDTO requestDTO);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "cartaoDeCredito", ignore = true)
+    @Mapping(target = "cartao", ignore = true)
     CompraCartao toCompraEntity(CompraCartaoRequestDTO dto);
 
     Despesa toDespesa(DespesaRequestDTO dto);
