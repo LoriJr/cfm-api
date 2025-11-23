@@ -15,4 +15,9 @@ public interface ContaAvulsaRepository extends JpaRepository<ContaAvulsa, Long>{
     List<ContaAvulsa> buscarPorFatura(Long familiaId, LocalDate inicio, LocalDate fim);
 
     List<ContaAvulsa> findByFamiliaId(Long familiaId);
+
+    @Query("SELECT c FROM ContaAvulsa c " +
+            "WHERE c.familia.id = :familiaId " +
+            "AND c.dataVencimento BETWEEN :inicio AND :fim")
+    List<ContaAvulsa> buscarPorMes(Long familiaId, LocalDate inicio, LocalDate fim);
 }
