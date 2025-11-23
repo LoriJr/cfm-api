@@ -26,6 +26,13 @@ public class CartaoDeCredito {
     @Column(name = "nome_do_cartao", nullable = false)
     private String nomeDoCartao;
 
+    @Column(name = "dia_vencimento")
+    private Integer diaVencimento;
+
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa titular;
+
     @OneToMany(mappedBy = "cartaoDeCredito", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompraCartao> compras = new ArrayList<>();
 

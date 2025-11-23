@@ -14,9 +14,6 @@ public class CompraCartaoRequestDTO {
     private LocalDate dataCompra;
 
     @NotNull
-    private Long cartaoId;
-
-    @NotNull
     @Valid
     private DespesaRequestDTO despesa;
 }
