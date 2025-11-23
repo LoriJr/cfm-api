@@ -68,3 +68,44 @@ Content-Type: application/json
     "periodo": "PRIMEIRA_QUINZENA"
   }
 }
+
+### CRIAR CARTÃO DE CREDITO
+POST http://localhost:8080/cartoes
+Content-Type: application/json
+
+{
+    "nomeDoCartao": "Nubank Ultravioleta",
+    "diaVencimento": 10,
+    "titularId": 4
+}
+
+### ADICIONAR COMPRA NO CARTÃO
+POST http://localhost:8080/cartoes/1/compras
+Content-Type: application/json
+
+{
+    "dataCompra": "2024-11-22",
+    "despesa": {
+        "descricao": "CINEMA",
+        "valor": 110.00,
+        "periodo": "PRIMEIRA_QUINZENA"
+    }
+}
+
+### CONSULTAR CARTÃO POR PESSOA
+GET http://localhost:8080/cartoes?pessoaId=4
+
+
+### ADICIONAR CONTA AVULSA
+POST http://localhost:8080/conta-avulsa
+Content-Type: application/json
+
+{
+    "dataVencimento": "2024-11-25",
+    "familiaId": 1,
+    "despesa": {
+        "descricao": "Conta de Luz Enel",
+        "valor": 145.50,
+        "periodo": "SEGUNDA_QUINZENA"
+    }
+}

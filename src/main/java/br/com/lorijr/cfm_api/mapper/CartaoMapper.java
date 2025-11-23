@@ -14,7 +14,7 @@ import org.mapstruct.Mapping;
 public interface CartaoMapper {
 
     @Mapping(target="nomeTitular", source="titular.nome")
-    @Mapping(target="totalFatura", expression="java(cartao.getTotalCompras")
+    @Mapping(target="totalFatura", expression="java(cartao.getTotalCompras())")
     CartaoResponseDTO cartaoToDTO(CartaoDeCredito cartao);
 
     @Mapping(target="id", ignore = true)
@@ -23,7 +23,7 @@ public interface CartaoMapper {
     CartaoDeCredito dtoToEntity(CartaoRequestDTO requestDTO);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "cartao", ignore = true)
+    @Mapping(target = "cartaoDeCredito", ignore = true)
     CompraCartao toCompraEntity(CompraCartaoRequestDTO dto);
 
     Despesa toDespesa(DespesaRequestDTO dto);
